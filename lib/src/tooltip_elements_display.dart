@@ -5,7 +5,7 @@ import 'enum/el_tooltip_position.dart';
 /// [ToolTipElementsDisplay] holds the size, position and style
 /// for the tooltip and the arrow.
 class ToolTipElementsDisplay {
-  final ElementBox bubble;
+  ElementBox bubble;
   final ElementBox arrow;
   final ElTooltipPosition position;
   final BorderRadiusGeometry? radius;

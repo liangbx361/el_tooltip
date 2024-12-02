@@ -235,6 +235,19 @@ class _ElTooltipState extends State<ElTooltip> with WidgetsBindingObserver {
       radius: widget.radius,
     ).load(preferredPosition: widget.position);
 
+    if (toolTipElementsDisplay.bubble.x + toolTipElementsDisplay.bubble.w > _screenSize.w) {
+      var oldBubble = toolTipElementsDisplay.bubble;
+      double value = oldBubble.x + oldBubble.w - _screenSize.w;
+      
+      var newBubble = ElementBox(
+        w: oldBubble.w,
+        h: oldBubble.h,
+        x: oldBubble.x - value,
+        y: oldBubble.y,
+      );
+      toolTipElementsDisplay.bubble = newBubble;
+    }
+
     _overlayKey = GlobalKey<ElTooltipOverlayState>();
 
     _overlayEntry = OverlayEntry(

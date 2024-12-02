@@ -397,8 +397,6 @@ class PositionManager {
         break;
     }
 
-    return _fitsScreen(elementPosition)
-        ? elementPosition
-        : _firstAvailablePosition();
+    return elementPosition;
   }
 }
