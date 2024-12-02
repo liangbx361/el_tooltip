@@ -121,7 +121,7 @@ class ElTooltipOverlayState extends State<ElTooltipOverlay> {
           ),
           Positioned(
             top: widget.toolTipElementsDisplay.bubble.y,
-            left: widget.toolTipElementsDisplay.bubble.x,
+            left: widget.toolTipElementsDisplay.bubble.x - widget.arrowOffset.dx - widget.arrowBox.w / 2,  
             child: Bubble(
               triggerBox: widget.triggerBox,
               padding: widget.padding,
@@ -133,7 +133,7 @@ class ElTooltipOverlayState extends State<ElTooltipOverlay> {
           if (widget.showArrow)
             Positioned(
               top: widget.toolTipElementsDisplay.arrow.y,
-              left: widget.toolTipElementsDisplay.arrow.x,
+              left: widget.toolTipElementsDisplay.arrow.x - widget.arrowOffset.dx - widget.arrowBox.w / 2,  
               child: Arrow(
                 color: widget.color,
                 position: widget.toolTipElementsDisplay.position,
