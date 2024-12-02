@@ -31,6 +31,8 @@ class ElTooltip extends StatefulWidget {
     this.radius = const Radius.circular(8),
     this.showModal = true,
     this.showArrow = true,
+    this.arrowSize = const Size(16, 10),
+    this.arrowOffset = Offset.zero,
     this.showChildAboveOverlay = true,
     this.modalConfiguration = const ModalConfiguration(),
     this.timeout = Duration.zero,
@@ -68,6 +70,12 @@ class ElTooltip extends StatefulWidget {
   /// [showArrow] Shows an arrow pointing to the trigger.
   final bool showArrow;
 
+  /// [arrowSize] Size of the arrow that points to the trigger.
+  final Size arrowSize;
+
+  /// [arrowOffset] Offset of the arrow that points to the trigger.
+  final Offset arrowOffset;
+
   /// [showChildAboveOverlay] Shows the child above the overlay.
   final bool showChildAboveOverlay;
 
@@ -96,7 +104,7 @@ class ElTooltip extends StatefulWidget {
 
 /// _ElTooltipState extends ElTooltip class
 class _ElTooltipState extends State<ElTooltip> with WidgetsBindingObserver {
-  final ElementBox _arrowBox = ElementBox(h: 10.0, w: 16.0);
+  late ElementBox _elementBox;
   ElementBox _overlayBox = ElementBox(h: 0.0, w: 0.0);
 
   OverlayEntry? _overlayEntry;
@@ -128,6 +136,7 @@ class _ElTooltipState extends State<ElTooltip> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    _elementBox = ElementBox(w: widget.arrowSize.width, h: widget.arrowSize.height);
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _loadHiddenOverlay(context));
     WidgetsBinding.instance.addObserver(this);
@@ -217,7 +226,8 @@ class _ElTooltipState extends State<ElTooltip> with WidgetsBindingObserver {
     /// By calling [PositionManager.load()] we get returned the position
     /// of the tooltip, the arrow and the trigger.
     ToolTipElementsDisplay toolTipElementsDisplay = PositionManager(
-      arrowBox: _arrowBox,
+      arrowBox: _elementBox,
+      arrowOffset: widget.arrowOffset,
       overlayBox: _overlayBox,
       triggerBox: _triggerBox,
       screenSize: _screenSize,
@@ -235,7 +245,8 @@ class _ElTooltipState extends State<ElTooltip> with WidgetsBindingObserver {
         content: widget.content,
         hideOverlay: _hideOverlay,
         triggerBox: _triggerBox,
-        arrowBox: _arrowBox,
+        arrowBox: _elementBox,
+        arrowOffset: widget.arrowOffset,
         modalConfiguration: widget.modalConfiguration,
         padding: widget.padding,
         showArrow: widget.showArrow,

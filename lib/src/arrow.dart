@@ -10,11 +10,14 @@ class Arrow extends StatelessWidget {
   final ElTooltipPosition position;
   final double width;
   final double height;
+  final Offset offset; // 添加偏移属性
+  
   const Arrow({
     required this.color,
     required this.position,
     this.width = 16.0,
     this.height = 10.0,
+    this.offset = Offset.zero, // 初始化偏移属性
     super.key,
   });
 
@@ -32,6 +35,10 @@ class Arrow extends StatelessWidget {
 
     switch (position) {
       case ElTooltipPosition.topStart:
+        if (offset.dx != 0) {
+          quarterTurns = 0;
+          isArrow = true;
+        }
         break;
       case ElTooltipPosition.topCenter:
         quarterTurns = 0;
@@ -75,14 +82,17 @@ class Arrow extends StatelessWidget {
         break;
     }
 
-    return Transform.scale(
-      scaleX: scaleX,
-      scaleY: scaleY,
-      child: RotatedBox(
-        quarterTurns: quarterTurns,
-        child: CustomPaint(
-          size: Size(width, height),
-          painter: _getElement(isArrow),
+    return Transform.translate(
+      offset: offset, // 应用偏移
+      child: Transform.scale(
+        scaleX: scaleX,
+        scaleY: scaleY,
+        child: RotatedBox(
+          quarterTurns: quarterTurns,
+          child: CustomPaint(
+            size: Size(width, height),
+            painter: _getElement(isArrow),
+          ),
         ),
       ),
     );

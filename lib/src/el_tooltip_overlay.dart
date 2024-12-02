@@ -21,6 +21,7 @@ class ElTooltipOverlay extends StatefulWidget {
     required this.hideOverlay,
     required this.triggerBox,
     required this.arrowBox,
+    required this.arrowOffset,
     required this.appearAnimationDuration,
     required this.disappearAnimationDuration,
   });
@@ -61,6 +62,9 @@ class ElTooltipOverlay extends StatefulWidget {
 
   /// [arrowBox] Box that contains the arrow
   final ElementBox arrowBox;
+
+  /// [arrowOffset] Offset of the arrow that points to the trigger.
+  final Offset arrowOffset;
 
   /// [appearAnimationDuration] Duration of the appear animation of the modal
   /// The default value is 0 which means it doesn't animate
@@ -135,6 +139,7 @@ class ElTooltipOverlayState extends State<ElTooltipOverlay> {
                 position: widget.toolTipElementsDisplay.position,
                 width: widget.arrowBox.w,
                 height: widget.arrowBox.h,
+                offset: widget.arrowOffset,
               ),
             ),
           if (widget.showChildAboveOverlay)

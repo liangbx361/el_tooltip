@@ -70,9 +70,13 @@ void main() {
               ),
               Row(
                 children: [
+                  Spacer(),
                   ElTooltip(
                     content: tooltipContent,
                     color: Color(0XFFEA4747),
+                    arrowSize: Size(15, 30),
+                    arrowOffset: Offset(10, 0),
+                    position: ElTooltipPosition.topStart,
                     child: tooltipIcon,
                   ),
                   Spacer(),

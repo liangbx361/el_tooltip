@@ -11,6 +11,9 @@ class PositionManager {
   /// [arrowBox] width, height, position x and y of the arrow.
   final ElementBox arrowBox;
 
+  /// [arrowOffset] x and y offset of the arrow.
+  final Offset arrowOffset;
+
   /// [triggerBox] width, height, position x and y of the trigger.
   final ElementBox triggerBox;
 
@@ -28,6 +31,7 @@ class PositionManager {
 
   PositionManager({
     required this.arrowBox,
+    required this.arrowOffset,
     required this.triggerBox,
     required this.overlayBox,
     required this.screenSize,
@@ -53,7 +57,7 @@ class PositionManager {
       radius: BorderRadius.only(
         topLeft: radius,
         topRight: radius,
-        bottomLeft: Radius.zero,
+        bottomLeft: arrowOffset.dx > 0 ? radius : Radius.zero,
         bottomRight: radius,
       ),
     );
